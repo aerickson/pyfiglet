@@ -409,15 +409,19 @@ class FigletString(unicode_string):
 
         return self.newFromList(out)
 
-    # TODO: handle fonts that might have whitespace inside the character
-    #   - currently removes the line
+    # doesn't do a simple strip (removes leading whitespace on first line of font)
+    # doesn't do a line by line check for only whitespace (can remove empty lines inside character)
     def remove_whitespace_lines(self):
         out = []
+        chars_seen = False
         for row in self.splitlines():
-            if row.strip() != "":
+            if row.strip() == "" and not chars_seen:
+                pass
+            else:
+                chars_seen = True
                 out.append(row)
 
-        return self.newFromList(out)
+        return self.newFromList(out).rstrip()
 
     def newFromList(self, list):
         return FigletString('\n'.join(list) + '\n')
