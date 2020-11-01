@@ -412,11 +412,7 @@ class FigletString(unicode_string):
     def strip_empty_lines(self):
         out = []
         for row in self.splitlines():
-            # out.append(row + "111")
-            if row.strip() == "":
-                # out.append(row)
-                pass
-            else:
+            if row.strip() != "":
                 out.append(row)
 
         return self.newFromList(out)
