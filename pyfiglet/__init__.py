@@ -409,6 +409,8 @@ class FigletString(unicode_string):
 
         return self.newFromList(out)
 
+    # TODO: handle fonts that might have whitespace inside the character
+    #   - currently removes the line
     def remove_whitespace_lines(self):
         out = []
         for row in self.splitlines():
