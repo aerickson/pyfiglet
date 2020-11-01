@@ -982,6 +982,7 @@ def main():
         sys.stdout.write(ansiColors.encode('UTF-8'))
 
     sys.stdout.write(r.encode('UTF-8'))
+    sys.stdout.write(b'\n')
 
     if ansiColors:
         sys.stdout.write(RESET_COLORS)
