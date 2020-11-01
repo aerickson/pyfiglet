@@ -409,7 +409,7 @@ class FigletString(unicode_string):
 
         return self.newFromList(out)
 
-    def strip_empty_lines(self):
+    def remove_whitespace_lines(self):
         out = []
         for row in self.splitlines():
             if row.strip() != "":
@@ -916,7 +916,7 @@ def main():
                            '(default: %default)')
     parser.add_option('-r', '--reverse', action='store_true', default=False,
                       help='shows mirror image of output text')
-    parser.add_option('-s', '--strip-empty-lines', action='store_true', default=False,
+    parser.add_option('-s', '--standardize-surrounding-whitespace', action='store_true', default=False,
                       help='removes empty leading and trailing lines')                      
     parser.add_option('-F', '--flip', action='store_true', default=False,
                       help='flips rendered output text over')
@@ -970,8 +970,8 @@ def main():
         r = r.reverse()
     if opts.flip:
         r = r.flip()
-    if opts.strip_empty_lines:
-        r = r.strip_empty_lines()
+    if opts.standardize_surrounding_whitespace:
+        r = r.remove_whitespace_lines()
 
     if sys.version_info > (3,):
         # Set stdout to binary mode
