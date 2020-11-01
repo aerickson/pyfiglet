@@ -409,6 +409,18 @@ class FigletString(unicode_string):
 
         return self.newFromList(out)
 
+    def strip_empty_lines(self):
+        out = []
+        for row in self.splitlines():
+            # out.append(row + "111")
+            if row.strip() == "":
+                # out.append(row)
+                pass
+            else:
+                out.append(row)
+
+        return self.newFromList(out)
+
     def newFromList(self, list):
         return FigletString('\n'.join(list) + '\n')
 
@@ -908,6 +920,8 @@ def main():
                            '(default: %default)')
     parser.add_option('-r', '--reverse', action='store_true', default=False,
                       help='shows mirror image of output text')
+    parser.add_option('-s', '--strip-empty-lines', action='store_true', default=False,
+                      help='removes empty leading and trailing lines')                      
     parser.add_option('-F', '--flip', action='store_true', default=False,
                       help='flips rendered output text over')
     parser.add_option('-l', '--list_fonts', action='store_true', default=False,
@@ -960,6 +974,8 @@ def main():
         r = r.reverse()
     if opts.flip:
         r = r.flip()
+    if opts.strip_empty_lines:
+        r = r.strip_empty_lines()
 
     if sys.version_info > (3,):
         # Set stdout to binary mode
@@ -970,7 +986,6 @@ def main():
         sys.stdout.write(ansiColors.encode('UTF-8'))
 
     sys.stdout.write(r.encode('UTF-8'))
-    sys.stdout.write(b'\n')
 
     if ansiColors:
         sys.stdout.write(RESET_COLORS)
