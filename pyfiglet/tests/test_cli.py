@@ -62,7 +62,7 @@ def test_strip():
 
 
 def test_strip_strange_font(test_font_dir):
-    install_command = "pyfiglet -L %s/doh-odd " % test_font_dir
+    install_command = "pyfiglet -L %s/doh-odd.flf " % test_font_dir
     subprocess.run(install_command, shell=True, check=True)
 
     command = "pyfiglet -f doh-odd -s 0"
