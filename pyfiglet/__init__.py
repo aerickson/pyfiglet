@@ -409,8 +409,8 @@ class FigletString(unicode_string):
 
         return self.newFromList(out)
 
-    # doesn't do a simple strip (can remove leading whitespace on first line with real chars)
-    # doesn't do a line by line check for only whitespace (can remove empty lines inside character)
+    # doesn't do self.strip() because it could remove leading whitespace on first line of the font
+    # doesn't do row.strip() because it could remove empty lines within the font character
     def remove_surrounding_whitespace_lines(self):
         out = []
         chars_seen = False
