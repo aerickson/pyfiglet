@@ -411,7 +411,7 @@ class FigletString(unicode_string):
 
     # doesn't do self.strip() because it could remove leading whitespace on first line of the font
     # doesn't do row.strip() because it could remove empty lines within the font character
-    def remove_surrounding_whitespace_lines(self):
+    def strip_surrounding_whitespace(self):
         out = []
         chars_seen = False
         for row in self.splitlines():
@@ -422,6 +422,9 @@ class FigletString(unicode_string):
                 out.append(row)
 
         return self.newFromList(out).rstrip()
+
+    def normalize_surrounding_whitespace(self):
+        return '\n' + self.strip_surrounding_whitespace() + '\n'
 
     def newFromList(self, list):
         return FigletString('\n'.join(list) + '\n')
@@ -922,7 +925,10 @@ def main():
                            '(default: %default)')
     parser.add_option('-r', '--reverse', action='store_true', default=False,
                       help='shows mirror image of output text')
-    parser.add_option('-s', '--standardize-surrounding-whitespace', action='store_true', default=False,
+    # TODO: should it be surrounding newlines vs surrounding whitespace?
+    parser.add_option('-n', '--normalize-surrounding-whitespace', action='store_true', default=False,
+                      help='output with one leading and one trailing empty lines')
+    parser.add_option('-s', '--strip-surrounding-whitespace', action='store_true', default=False,
                       help='removes empty leading and trailing lines')                      
     parser.add_option('-F', '--flip', action='store_true', default=False,
                       help='flips rendered output text over')
@@ -976,8 +982,10 @@ def main():
         r = r.reverse()
     if opts.flip:
         r = r.flip()
-    if opts.standardize_surrounding_whitespace:
-        r = r.remove_surrounding_whitespace_lines()
+    if opts.strip_surrounding_whitespace:
+        r = r.strip_surrounding_whitespace()
+    elif opts.normalize_surrounding_whitespace:
+        r = r.normalize_surrounding_whitespace()
 
     if sys.version_info > (3,):
         # Set stdout to binary mode
