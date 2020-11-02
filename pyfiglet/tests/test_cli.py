@@ -31,7 +31,7 @@ def test_strip():
    00:::::::::00   
      000000000
 '''
-    result = subprocess.run(command, shell=True, capture_output=True)
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
     assert result.stdout.decode() == expected
     assert result.returncode == 0
 
@@ -56,7 +56,7 @@ def test_strip():
    00:::::::::00   
      000000000
 '''
-    result = subprocess.run(command, shell=True, capture_output=True)
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
     assert result.stdout.decode() == expected
     assert result.returncode == 0
 
@@ -89,7 +89,7 @@ def test_strip_strange_font(test_font_dir):
    00:::::::::00   
      000000000
 '''
-    result = subprocess.run(command, shell=True, capture_output=True)
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
     assert result.stdout.decode() == expected
     assert result.returncode == 0
 
@@ -117,6 +117,6 @@ def test_normalize():
      000000000
 
 '''
-    result = subprocess.run(command, shell=True, capture_output=True)
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
     assert result.stdout.decode() == expected
     assert result.returncode == 0
