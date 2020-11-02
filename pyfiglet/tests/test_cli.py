@@ -4,6 +4,9 @@ import subprocess
 import pytest
 
 
+# NOTE: for subprocess.run calls:
+#   stdout=subprocess.PIPE can be replaced with capture_output=True in 3.6+
+
 @pytest.fixture
 # script working directory
 def test_font_dir():
