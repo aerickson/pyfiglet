@@ -61,7 +61,6 @@ def test_strip(test_font_dir):
     assert result.stdout.decode() == expected
 
 
-
 def test_strip_strange_font():
     # command = "%s/bin/tq %s/btq/tests/simple.toml ." % (root_dir, root_dir)
     install_command = "pyfiglet -L %s/doh-odd " % test_font_dir
