@@ -7,7 +7,7 @@ import subprocess32
 @pytest.fixture
 def test_font_dir():
     swd = os.path.dirname(os.path.abspath(__file__))
-    return os.path.abspath(swd)
+    return os.path.abspath(os.path.join(swd, '..', '..', 'test-fonts'))
 
 
 def test_strip():
@@ -36,10 +36,10 @@ def test_strip():
 
 
 def test_strip_strange_font(test_font_dir):
-    install_command = "pyfiglet -L %s/doh-odd.flf " % test_font_dir
+    install_command = "pyfiglet -L %s/doh-TESTING.flf " % test_font_dir
     subprocess32.run(install_command, shell=True, check=True)
 
-    command = "pyfiglet -f doh-odd -s 0"
+    command = "pyfiglet -f doh-TESTING -s 0"
     expected = '''\
      000000000     
    00:::::::::00   
