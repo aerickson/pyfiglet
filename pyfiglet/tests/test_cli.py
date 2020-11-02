@@ -33,9 +33,10 @@ def test_strip():
 '''
     result = subprocess.run(command, shell=True, capture_output=True)
     assert result.stdout.decode() == expected
+    assert result.returncode == 0
 
 
-def test_strip(test_font_dir):
+def test_strip():
     command = "pyfiglet -f doh -s 0"
     expected = '''\
      000000000     
@@ -57,11 +58,12 @@ def test_strip(test_font_dir):
 '''
     result = subprocess.run(command, shell=True, capture_output=True)
     assert result.stdout.decode() == expected
+    assert result.returncode == 0
 
 
-def test_strip_strange_font():
+def test_strip_strange_font(test_font_dir):
     install_command = "pyfiglet -L %s/doh-odd " % test_font_dir
-    subprocess.run(install_command, shell=True)
+    subprocess.run(install_command, shell=True, check=True)
 
     command = "pyfiglet -f doh-odd -s 0"
     expected = '''\
@@ -89,6 +91,7 @@ def test_strip_strange_font():
 '''
     result = subprocess.run(command, shell=True, capture_output=True)
     assert result.stdout.decode() == expected
+    assert result.returncode == 0
 
 
 # normalize is just strip with padding
@@ -116,3 +119,4 @@ def test_normalize():
 '''
     result = subprocess.run(command, shell=True, capture_output=True)
     assert result.stdout.decode() == expected
+    assert result.returncode == 0
