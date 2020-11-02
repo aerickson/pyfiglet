@@ -925,7 +925,6 @@ def main():
                            '(default: %default)')
     parser.add_option('-r', '--reverse', action='store_true', default=False,
                       help='shows mirror image of output text')
-    # TODO: should it be surrounding newlines vs surrounding whitespace?
     parser.add_option('-n', '--normalize-surrounding-newlines', action='store_true', default=False,
                       help='output has one empty line before and after')
     parser.add_option('-s', '--strip-surrounding-newlines', action='store_true', default=False,
