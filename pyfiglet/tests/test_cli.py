@@ -12,7 +12,6 @@ def test_font_dir():
 
 
 def test_strip():
-    # command = "%s/bin/tq %s/btq/tests/simple.toml ." % (root_dir, root_dir)
     command = "pyfiglet -f doh -s 0"
     expected = '''\
      000000000     
@@ -37,7 +36,6 @@ def test_strip():
 
 
 def test_strip(test_font_dir):
-    # command = "%s/bin/tq %s/btq/tests/simple.toml ." % (root_dir, root_dir)
     command = "pyfiglet -f doh -s 0"
     expected = '''\
      000000000     
@@ -62,7 +60,6 @@ def test_strip(test_font_dir):
 
 
 def test_strip_strange_font():
-    # command = "%s/bin/tq %s/btq/tests/simple.toml ." % (root_dir, root_dir)
     install_command = "pyfiglet -L %s/doh-odd " % test_font_dir
     subprocess.run(install_command, shell=True)
 
@@ -96,9 +93,7 @@ def test_strip_strange_font():
 
 # normalize is just strip with padding
 def test_normalize():
-    # command = "%s/bin/tq %s/btq/tests/simple.toml ." % (root_dir, root_dir)
     command = "pyfiglet -f doh -n 0"
-    # print(command)
     expected = '''\
 
      000000000     
