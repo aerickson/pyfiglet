@@ -415,12 +415,12 @@ class FigletString(unicode_string):
         out = []
         chars_seen = False
         for row in self.splitlines():
-            if row.strip() == "" and not chars_seen:
-                pass
-            else:
+            # if the row isn't empty or if we're in the middle of the font character, add the line.
+            if row.strip() != "" or chars_seen:
                 chars_seen = True
                 out.append(row)
 
+        # rstrip to get rid of the trailing newlines
         return self.newFromList(out).rstrip()
 
     def normalize_surrounding_newlines(self):
