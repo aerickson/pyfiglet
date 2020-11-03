@@ -36,32 +36,20 @@ def test_strip():
 
 
 def test_strip_strange_font(test_font_dir):
-    install_command = "pyfiglet -L %s/doh-TESTING.flf " % test_font_dir
+    install_command = "pyfiglet -L %s/TEST_ONLY.flf " % test_font_dir
     subprocess32.run(install_command, shell=True, check=True)
 
-    command = "pyfiglet -f doh-TESTING -s 0"
+    command = "pyfiglet -f TEST_ONLY -s 0"
     expected = '''\
-     000000000     
-   00:::::::::00   
- 00:::::::::::::00 
-0:::::::000:::::::0
-0::::::0   0::::::0
-0:::::0     0:::::0
-                   
-0:::::0     0:::::0
-                   
-0:::::0 000 0:::::0
-                   
-0:::::0 000 0:::::0
-                   
-0:::::0     0:::::0
-                   
-0:::::0     0:::::0
-0::::::0   0::::::0
-0:::::::000:::::::0
- 00:::::::::::::00 
-   00:::::::::00   
-     000000000
+0000000000  
+            
+000    000  
+            
+000    000  
+            
+000    000  
+            
+0000000000
 '''
     result = subprocess32.run(command, shell=True, stdout=subprocess32.PIPE)
     assert result.stdout.decode() == expected
